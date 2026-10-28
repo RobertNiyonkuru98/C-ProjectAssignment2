@@ -361,3 +361,28 @@ void generate_text_summary(Text *t) {
          best_len, t->stats[best_index].name, best_count,
          100.0 * t->distinct / t->total_words);
 }
+
+void show_memory_addresses(Text *t) {
+  printf("\n  ---------------- Memory inspection ----------------\n");
+  printf("  Text buffer address     : %p\n", (void *)t->text);
+  printf("  Word statistics array   : %p\n", (void *)t->stats);
+
+  if (t->distinct > 0) {
+    printf("  First word-stat entry   : %p\n", (void *)&t->stats[0]);
+    printf("  Second word-stat entry  : %p\n", (void *)&t->stats[1]);
+    printf("\n  The first two entries are %d bytes apart, which is exactly\n"
+           "  sizeof(wordStat): %d bytes for the name field plus %d bytes\n"
+           "  for the count.\n",
+           (int)sizeof(wordStat), (int)sizeof(t->stats[0].name),
+           (int)sizeof(t->stats[0].count));
+  }
+  printf("\n  The text buffer and the word array are both on the heap:\n"
+         "  malloc/calloc/realloc placed them there, and free() releases\n"
+         "  them at the end of the program.\n");
+}
+
+void quit_program(Text *t) {
+  (void)t;
+  g_running = 0;
+  printf("\n  Exiting.\n");
+}
