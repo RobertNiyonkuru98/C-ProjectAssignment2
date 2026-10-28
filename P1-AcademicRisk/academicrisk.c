@@ -359,3 +359,110 @@ void sort_students(StudentList *list) {
   printf("  Sorted.\n");
   display_students(list);
 }
+
+void calculate_average(StudentList *list) {
+  if (list->count == 0) {
+    printf("\n  No records - the average is undefined.\n");
+    return;
+  }
+  printf("\n  Average grade across %d records: %.2f\n", list->count,
+         list_average(list));
+}
+
+void find_top_student(StudentList *list) {
+  const Student *p;
+  const Student *top;
+
+  if (list->count == 0) {
+    printf("\n  No records - there is no top student.\n");
+    return;
+  }
+
+  top = list->items;
+  for (p = list->items + 1; p < list->items + list->count; p++) {
+    if (p->grade > top->grade) {
+      top = p;
+    }
+  }
+
+  printf("\n  Top performing student: %s (ID %d, %s) with %d.\n", top->name,
+         top->id, top->course, top->grade);
+}
+
+void search_student(StudentList *list) {
+  const Student *p;
+  int mode;
+  int status;
+  int value;
+  int found = 0;
+
+  if (list->count == 0) {
+    printf("\n  No records to search.\n");
+    return;
+  }
+
+  printf("\n  Search by:\n    1. Student ID\n    2. Name\n");
+  status = read_int("  Choice: ", &mode);
+  if (status == 0) {
+    printf("\n  Input closed - search cancelled.\n");
+    return;
+  }
+  if (status == -1) {
+    printf("  Invalid choice - search cancelled.\n");
+    return;
+  }
+
+  if (mode == 1) {
+    status = read_int("  Student ID: ", &value);
+    if (status == 0) {
+      printf("\n  Input closed - search cancelled.\n");
+      return;
+    }
+    if (status == -1) {
+      printf("  Invalid: enter a whole number.\n");
+      return;
+    }
+
+    for (p = list->items; p < list->items + list->count; p++) {
+      if (p->id == value) {
+        printf("  Found: %s (ID %d, %s, grade %d).\n", p->name, p->id,
+               p->course, p->grade);
+        found = 1;
+        break;
+      }
+    }
+    if (!found) {
+      printf("  No student with ID %d.\n", value);
+    }
+  } else if (mode == 2) {
+    char needle[48];
+
+    printf("  Name to search for: ");
+    status = read_line(needle, 48);
+    if (status == 0) {
+      printf("\n  Input closed - search cancelled.\n");
+      return;
+    }
+    if (status == -1) {
+      printf("  Invalid: name is too long.\n");
+      return;
+    }
+    if (needle[0] == '\0') {
+      printf("  Invalid: enter a name.\n");
+      return;
+    }
+
+    for (p = list->items; p < list->items + list->count; p++) {
+      if (str_compare_insensitive(p->name, needle) == 0) {
+        printf("  Found: %s (ID %d, %s, grade %d).\n", p->name, p->id,
+               p->course, p->grade);
+        found = 1;
+      }
+    }
+    if (!found) {
+      printf("  No student named \"%s\".\n", needle);
+    }
+  } else {
+    printf("  Invalid choice - search cancelled.\n");
+  }
+}
