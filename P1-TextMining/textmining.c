@@ -207,3 +207,27 @@ void most_frequent(Text *t) {
   printf("\n  Most frequent word: \"%s\" used %d times.\n", t->stats[best].name,
          t->stats[best].count);
 }
+
+void display_word_statistics(Text *t) {
+  const wordStat *p;
+
+  if (t->distinct == 0) {
+    printf("\n  There are no words to show.\n");
+    return;
+  }
+  printf("\n  --- Word statistics (%d distinct words) ---\n", t->distinct);
+  printf("  %-30s %s\n  %-30s %s\n", "Word", "Count",
+         "------------------------------", "-----");
+  for (p = t->stats; p < t->stats + t->distinct; p++)
+    printf("  %-30s %5d\n", p->name, p->count);
+}
+
+int cmp_alpha(const void *a, const void *b) {
+  return strcmp(((const wordStat *)a)->name, ((const wordStat *)b)->name);
+}
+
+int cmp_count_desc(const void *a, const void *b) {
+  const wordStat *sa = a, *sb = b;
+  int d = sb->count - sa->count;
+  return d != 0 ? d : strcmp(sa->name, sb->name);
+}
