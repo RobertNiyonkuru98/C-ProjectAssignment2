@@ -320,3 +320,42 @@ void display_students(StudentList *list) {
     printf("  %-6d %-24s %-26s %3d\n", p->id, p->name, p->course, p->grade);
   }
 }
+
+void sort_students(StudentList *list) {
+  int choice;
+  int status;
+  int (*comparator)(const void *, const void *);
+
+  if (list->count < 2) {
+    printf("\n  Nothing to sort (fewer than two records).\n");
+    return;
+  }
+
+  printf("\n  Sort by:\n    1. Grade (highest first)\n");
+  printf("    2. Name (A-Z)\n    3. Student ID (ascending)\n");
+
+  status = read_int("  Choice: ", &choice);
+  if (status == 0) {
+    printf("\n  Input closed - sort cancelled.\n");
+    return;
+  }
+  if (status == -1) {
+    printf("  Invalid choice - sort cancelled.\n");
+    return;
+  }
+
+  if (choice == 1) {
+    comparator = gradeDescCompare;
+  } else if (choice == 2) {
+    comparator = nameAscCompare;
+  } else if (choice == 3) {
+    comparator = idAscCompare;
+  } else {
+    printf("  Invalid choice - sort cancelled.\n");
+    return;
+  }
+
+  qsort(list->items, list->count, sizeof(Student), comparator);
+  printf("  Sorted.\n");
+  display_students(list);
+}
