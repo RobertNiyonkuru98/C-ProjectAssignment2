@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,6 +18,9 @@ typedef struct {
 } StudentList;
 
 typedef void (*Operation)(StudentList *);
+
+int g_running = 1;
+
 
 int ensure_capacity(StudentList *list, int needed) {
   int new_capacity;
@@ -110,9 +114,27 @@ int count_below_pass(StudentList *list) {
   return count;
 }
 
-int gradeDescCompare(void *a, void *b) {
-  Student *sa = (Student *)a;
-  Student *sb = (Student *)b;
+int str_compare_insensitive(const char *a, const char *b) {
+  char la[48];
+  char lb[48];
+  int i;
+
+  for (i = 0; i + 1 < 48 && a[i] != '\0'; i++) {
+    la[i] = (char)tolower((unsigned char)a[i]);
+  }
+  la[i] = '\0';
+
+  for (i = 0; i + 1 < 48 && b[i] != '\0'; i++) {
+    lb[i] = (char)tolower((unsigned char)b[i]);
+  }
+  lb[i] = '\0';
+
+  return strcmp(la, lb);
+}
+
+int gradeDescCompare(const void *a, const void *b) {
+  const Student *sa = (const Student *)a;
+  const Student *sb = (const Student *)b;
 
   if (sa->grade != sb->grade) {
     return (sa->grade < sb->grade) - (sa->grade > sb->grade);
@@ -120,9 +142,9 @@ int gradeDescCompare(void *a, void *b) {
   return sa->id - sb->id;
 }
 
-int nameAscCompare(void *a, void *b) {
-  Student *sa = (Student *)a;
-  Student *sb = (Student *)b;
+int nameAscCompare(const void *a, const void *b) {
+  const Student *sa = (const Student *)a;
+  const Student *sb = (const Student *)b;
   int by_name = str_compare_insensitive(sa->name, sb->name);
 
   if (by_name != 0) {
@@ -131,9 +153,9 @@ int nameAscCompare(void *a, void *b) {
   return sa->id - sb->id;
 }
 
-int idAscCompare(void *a, void *b) {
-  Student *sa = (Student *)a;
-  Student *sb = (Student *)b;
+int idAscCompare(const void *a, const void *b) {
+  const Student *sa = (const Student *)a;
+  const Student *sb = (const Student *)b;
   return sa->id - sb->id;
 }
 
@@ -689,7 +711,6 @@ void generate_summary_report(StudentList *list) {
 }
 
 void quit_program(StudentList *list) {
-  int g_running = 1;
   (void)list;
   g_running = 0;
   printf("\n  Exiting.\n");
@@ -768,7 +789,6 @@ int main() {
   StudentList list;
   int status;
   int choice;
-  int g_running = 1;
 
   list.capacity = 10;
   list.count = 0;
