@@ -251,3 +251,37 @@ void battery_monitor(Device *d) {
               "battery_monitor", v);
   }
 }
+
+void drift_monitor(Device *d) {
+  float value, change, limit;
+
+  if (d->type == 1) {
+    value = d->reading.temperature;
+    limit = 5.0f;
+  } else if (d->type == 2) {
+    value = (float)d->reading.pressure;
+    limit = (float)3;
+  } else {
+    value = d->reading.voltage;
+    limit = 0.3f;
+  }
+
+  if (!d->has_last) {
+    d->last_value = value;
+    d->has_last = 1;
+    return;
+  }
+  change = value - d->last_value;
+  if (change < 0)
+    change = -change;
+  if (change > limit) {
+    if (g_monitor != NULL)
+      g_monitor->drift_flags++;
+    printf("  DRIFT  %-20s moved %.2f %s since the last reading (limit "
+           "%.2f)\n",
+           d->name, change, type_unit(d->type), limit);
+    add_alert(d, "change between readings", "sensor drift suspected",
+              "drift_monitor", value);
+  }
+  d->last_value = value;
+}
