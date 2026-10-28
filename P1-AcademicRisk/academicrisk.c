@@ -195,3 +195,110 @@ int is_valid_name(const char *s) {
   }
   return has_letter;
 }
+
+void add_student(StudentList *list) {
+  Student record;
+  int status;
+  int value;
+  int i;
+
+  printf("\n  --- Add a new student record ---\n");
+
+  if (!ensure_capacity(list, list->count + 1)) {
+    return;
+  }
+
+  for (;;) {
+    status = read_int("  Student ID: ", &value);
+    if (status == 0) {
+      printf("\n  Input closed - add cancelled.\n");
+      return;
+    }
+    if (status == -1) {
+      printf("  Invalid: enter a whole number.\n");
+      continue;
+    }
+    if (value <= 0) {
+      printf("  Invalid: the ID must be a positive integer.\n");
+      continue;
+    }
+    i = find_index_by_id(list, value);
+    if (i >= 0) {
+      printf("  Rejected: ID %d is already used by %s.\n", value,
+             list->items[i].name);
+      continue;
+    }
+    record.id = value;
+    break;
+  }
+
+  // name
+  for (;;) {
+    char buffer[48];
+
+    printf("  Full name: ");
+    status = read_line(buffer, 48);
+    if (status == 0) {
+      printf("\n  Input closed - add cancelled.\n");
+      return;
+    }
+    if (status == -1) {
+      printf("  Invalid: name is too long (maximum %d characters).\n", 48 - 1);
+      continue;
+    }
+    if (!is_valid_name(buffer)) {
+      printf("  Invalid: use letters, spaces, hyphens or apostrophes.\n");
+      continue;
+    }
+    strcpy(record.name, buffer);
+    break;
+  }
+
+  // course
+  for (;;) {
+    char buffer[40];
+
+    printf("  Course: ");
+    status = read_line(buffer, 40);
+    if (status == 0) {
+      printf("\n  Input closed - add cancelled.\n");
+      return;
+    }
+    if (status == -1) {
+      printf("  Invalid: course name is too long (maximum %d characters).\n",
+             40 - 1);
+      continue;
+    }
+    if (buffer[0] == '\0') {
+      printf("  Invalid: the course name cannot be empty.\n");
+      continue;
+    }
+    strcpy(record.course, buffer);
+    break;
+  }
+
+  // grade
+  for (;;) {
+    status = read_int("  Grade (0-100): ", &value);
+    if (status == 0) {
+      printf("\n  Input closed - add cancelled.\n");
+      return;
+    }
+    if (status == -1) {
+      printf("  Invalid: enter a whole number between 0 and 100.\n");
+      continue;
+    }
+    if (value < 0 || value > 100) {
+      printf("  Invalid: the grade must be between 0 and 100.\n");
+      continue;
+    }
+    record.grade = value;
+    break;
+  }
+
+  list->items[list->count] = record;
+  list->count++;
+
+  printf("  Added: %s (ID %d, %s, %d). Records now: %d.\n", record.name,
+         record.id, record.course, record.grade, list->count);
+}
