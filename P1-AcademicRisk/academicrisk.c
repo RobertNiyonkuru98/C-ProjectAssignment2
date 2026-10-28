@@ -763,3 +763,54 @@ void load_seed_dataset(StudentList *list) {
     list->count++;
   }
 }
+
+int main() {
+  StudentList list;
+  int status;
+  int choice;
+  int g_running = 1;
+
+  list.capacity = 10;
+  list.count = 0;
+  list.items = calloc(10, sizeof(Student));
+
+  if (list.items == NULL) {
+    printf("Error: could not allocate memory for the initial records.\n");
+    return 1;
+  }
+
+  printf("  [mem] capacity 0 -> %d (initial calloc)\n", 10);
+
+  load_seed_dataset(&list);
+  print_header();
+  printf("\n  Loaded %d starting records (capacity %d).\n", list.count,
+         list.capacity);
+
+  while (g_running) {
+    print_menu();
+    status = read_int("  Enter choice: ", &choice);
+
+    if (status == 0) {
+      printf("\n  Input closed.\n");
+      break;
+    }
+    if (status == -1) {
+      printf("  Invalid: enter a number from 1 to %d.\n", MENU_COUNT);
+      continue;
+    }
+    if (choice < 1 || choice > MENU_COUNT) {
+      printf("  Invalid: enter a number from 1 to %d.\n", MENU_COUNT);
+      continue;
+    }
+
+    operations[choice - 1](&list);
+  }
+
+  free(list.items);
+  list.items = NULL;
+  list.count = 0;
+  list.capacity = 0;
+
+  printf("\n  All memory released. Goodbye.\n");
+  return 0;
+}
