@@ -466,3 +466,44 @@ void search_student(StudentList *list) {
     printf("  Invalid choice - search cancelled.\n");
   }
 }
+
+void remove_student(StudentList *list) {
+  int status;
+  int value;
+  int index;
+  int i;
+
+  if (list->count == 0) {
+    printf("\n  No records to remove.\n");
+    return;
+  }
+
+  status = read_int("  Student ID to remove: ", &value);
+  if (status == 0) {
+    printf("\n  Input closed - removal cancelled.\n");
+    return;
+  }
+  if (status == -1) {
+    printf("  Invalid: enter a whole number.\n");
+    return;
+  }
+
+  index = find_index_by_id(list, value);
+  if (index < 0) {
+    printf("  No student with ID %d - nothing removed.\n", value);
+    return;
+  }
+
+  printf("  Removing %s (ID %d, grade %d).\n", list->items[index].name,
+         list->items[index].id, list->items[index].grade);
+
+  // move every later record one slot down
+  for (i = index; i + 1 < list->count; i++) {
+    list->items[i] = list->items[i + 1];
+  }
+  list->count--;
+
+  shrink_if_parse(list);
+  printf("  Removed. Records now: %d (capacity %d).\n", list->count,
+         list->capacity);
+}
