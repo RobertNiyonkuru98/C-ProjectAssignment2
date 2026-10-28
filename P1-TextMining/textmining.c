@@ -296,3 +296,32 @@ void search_word(Text *t) {
     }
   printf("  \"%s\" does not appear in the text.\n", needle);
 }
+
+void custom_analysis(Text *t) {
+  double score;
+  int repeated = 0, i;
+
+  if (t->total_words == 0) {
+    printf("\n  The text has no words to analyse.\n");
+    return;
+  }
+  score = 100.0 * t->distinct / t->total_words;
+  for (i = 0; i < t->distinct; i++)
+    if (t->stats[i].count > 1)
+      repeated++;
+
+  printf("\n  --- Custom analysis: Lexical Diversity Score ---\n"
+         "  Distinct words : %d\n"
+         "  Total words    : %d\n"
+         "  Score          : %.1f%%\n",
+         t->distinct, t->total_words, score);
+  if (score < 40.0)
+    printf("  Reading        : low diversity - heavy repetition\n");
+  else if (score < 60.0)
+    printf("  Reading        : moderate diversity\n");
+  else
+    printf("  Reading        : high diversity - varied vocabulary\n");
+  printf("  Words used more than once: %d of %d\n", repeated, t->distinct);
+  printf("  Note: short texts score higher simply because there is less\n"
+         "  chance to repeat a word.\n");
+}
