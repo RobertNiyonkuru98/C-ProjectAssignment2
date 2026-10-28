@@ -98,6 +98,18 @@ double list_average(const StudentList *list) {
   return total / (double)list->count;
 }
 
+int count_below_pass(StudentList *list) {
+  Student *p;
+  int count = 0;
+
+  for (p = list->items; p < list->items + list->count; p++) {
+    if (p->grade < 50) {
+      count++;
+    }
+  }
+  return count;
+}
+
 int gradeDescCompare(void *a, void *b) {
   Student *sa = (Student *)a;
   Student *sb = (Student *)b;
@@ -506,4 +518,179 @@ void remove_student(StudentList *list) {
   shrink_if_parse(list);
   printf("  Removed. Records now: %d (capacity %d).\n", list->count,
          list->capacity);
+}
+
+double academic_risk_index(int grade, double cohort_mean) {
+  double deficit;
+  double relative_gap;
+  double index;
+
+  deficit = (double)50 - (double)grade;
+  if (deficit < 0.0) {
+    deficit = 0.0;
+  }
+
+  relative_gap = cohort_mean - (double)grade;
+  if (relative_gap < 0.0) {
+    relative_gap = 0.0;
+  }
+
+  index = 100.0 * ((0.6 * deficit / (double)50) + (0.4 * relative_gap / 100.0));
+
+  if (index < 0.0) {
+    index = 0.0;
+  }
+  if (index > 100.0) {
+    index = 100.0;
+  }
+  return index;
+}
+
+const char *ari_band(double index) {
+  if (index < 10.0) {
+    return "Secure";
+  }
+  if (index < 25.0) {
+    return "Low";
+  }
+  if (index < 50.0) {
+    return "Moderate";
+  }
+  return "High";
+}
+
+void custom_analysis(StudentList *list) {
+  const Student *p;
+  const Student *worst = NULL;
+  double mean;
+  double total_risk = 0.0;
+  double highest_risk = -1.0;
+  int secure = 0;
+  int low = 0;
+  int moderate = 0;
+  int high = 0;
+
+  if (list->count == 0) {
+    printf("\n  No records - the analysis needs at least one student.\n");
+    return;
+  }
+
+  mean = list_average(list);
+
+  printf("\n  --- Custom analysis: Academic Risk Index (ARI) ---\n");
+  printf("  Pass mark: %d    Cohort mean: %.2f\n\n", 50, mean);
+  printf("  %-6s %-24s %6s %8s %8s %7s  %s\n", "ID", "Name", "Grade", "Deficit",
+         "Rel.Gap", "ARI", "Band");
+  printf("  %-6s %-24s %6s %8s %8s %7s  %s\n", "------",
+         "------------------------", "------", "--------", "--------",
+         "-------", "--------");
+
+  for (p = list->items; p < list->items + list->count; p++) {
+    double index = academic_risk_index(p->grade, mean);
+    double deficit = (double)50 - (double)p->grade;
+    double relative_gap = mean - (double)p->grade;
+
+    if (deficit < 0.0) {
+      deficit = 0.0;
+    }
+    if (relative_gap < 0.0) {
+      relative_gap = 0.0;
+    }
+
+    printf("  %-6d %-24s %6d %8.1f %8.1f %7.1f  %s\n", p->id, p->name, p->grade,
+           deficit, relative_gap, index, ari_band(index));
+
+    total_risk = total_risk + index;
+    if (index > highest_risk) {
+      highest_risk = index;
+      worst = p;
+    }
+    if (index < 10.0) {
+      secure++;
+    } else if (index < 25.0) {
+      low++;
+    } else if (index < 50.0) {
+      moderate++;
+    } else {
+      high++;
+    }
+  }
+
+  printf("\n  Cohort ARI: mean %.1f\n", total_risk / (double)list->count);
+  printf("  Secure: %d    Low: %d    Moderate: %d    High: %d\n", secure, low,
+         moderate, high);
+  if (worst != NULL) {
+    printf("  Highest risk: %s (ID %d, grade %d, ARI %.1f, %s)\n", worst->name,
+           worst->id, worst->grade, highest_risk, ari_band(highest_risk));
+  }
+
+  printf("\n  Note: the ARI measures the size of each gap. Below pass mark: "
+         "%d.\n",
+         count_below_pass(list));
+}
+
+void generate_summary_report(StudentList *list) {
+  const Student *p;
+  const Student *highest;
+  const Student *lowest;
+  int pass_count = 0;
+  int fail_count = 0;
+  int high_risk = 0;
+  double mean;
+  double total_risk = 0.0;
+
+  if (list->count == 0) {
+    printf("\n  No records - nothing to summarise.\n");
+    return;
+  }
+
+  mean = list_average(list);
+  highest = list->items;
+  lowest = list->items;
+
+  for (p = list->items; p < list->items + list->count; p++) {
+    double risk = academic_risk_index(p->grade, mean);
+
+    if (p->grade > highest->grade) {
+      highest = p;
+    }
+    if (p->grade < lowest->grade) {
+      lowest = p;
+    }
+    if (p->grade >= 50) {
+      pass_count++;
+    } else {
+      fail_count++;
+    }
+    if (risk >= 50.0) {
+      high_risk++;
+    }
+    total_risk = total_risk + risk;
+  }
+
+  printf("\n");
+  printf("  ===================== SUMMARY REPORT =====================\n");
+  printf("  Total student records : %d\n", list->count);
+  printf("  Average grade         : %.2f\n", mean);
+  printf("  Highest grade         : %d (%s, ID %d)\n", highest->grade,
+         highest->name, highest->id);
+  printf("  Lowest grade          : %d (%s, ID %d)\n", lowest->grade,
+         lowest->name, lowest->id);
+  printf("  Pass threshold        : %d\n", 50);
+  printf("  Students passing      : %d\n", pass_count);
+  printf("  Students below pass   : %d\n", fail_count);
+  printf("  Memory in use         : %d records in %d slots\n", list->count,
+         list->capacity);
+  printf("  ----------------------------------------------------------\n");
+  printf("  Custom analysis (Academic Risk Index):\n");
+  printf("    Cohort ARI mean     : %.1f\n", total_risk / (double)list->count);
+  printf("    Moderate/High risk  : %d student(s) with ARI >= 50\n", high_risk);
+  printf("  ==========================================================\n");
+}
+
+void quit_program(StudentList *list) {
+  int g_running = 1;
+  (void)list;
+  g_running = 0;
+  printf("\n  Exiting.\n");
 }
