@@ -1,0 +1,263 @@
+  [mem] device list 0 -> 4 slots
+  [mem] alert list 0 -> 8 slots
+
+  ==================================================================
+  Student ID : YOUR-STUDENT-ID
+  Project    : Dynamic IoT Event Monitoring and Callback Engine
+  Custom     : Sensor Drift Detector (callback)
+  ==================================================================
+
+  Loaded 4 starting devices (capacity 4).
+
+  ------------------------- MENU -------------------------
+   1. Register a new device
+   2. Display all registered devices
+   3. Remove a device by ID
+   4. Generate simulated readings
+   5. Display detected alerts
+   6. Monitoring summary
+   7. Exit
+  --------------------------------------------------------
+  Enter choice: 
+  --- Registered devices (4) ---
+  ID    Name                   Type            Reading  Status
+  ----- ---------------------- ------------ ----------  ------
+  1     Boiler Room Temp       Temperature       0.0 C  normal
+  2     Main Line Pressure     Pressure          0 kPa  normal
+  3     Backup Battery         Battery          0.00 V  normal
+  4     Cold Room Temp         Temperature       0.0 C  normal
+
+  ------------------------- MENU -------------------------
+   1. Register a new device
+   2. Display all registered devices
+   3. Remove a device by ID
+   4. Generate simulated readings
+   5. Display detected alerts
+   6. Monitoring summary
+   7. Exit
+  --------------------------------------------------------
+  Enter choice: 
+  --- Register a new device ---
+  [mem] device list 4 -> 8 slots
+  Device ID:   Device name:   Device type: 1 = temperature, 2 = pressure, 3 = battery
+  Type:   Registered Server Rack Temp (ID 5, Temperature). Devices now: 5.
+
+  ------------------------- MENU -------------------------
+   1. Register a new device
+   2. Display all registered devices
+   3. Remove a device by ID
+   4. Generate simulated readings
+   5. Display detected alerts
+   6. Monitoring summary
+   7. Exit
+  --------------------------------------------------------
+  Enter choice: 
+  --- Simulating 12 readings ---
+
+  reading  1: Boiler Room Temp (ID 1, Temperature)
+  normal Boiler Room Temp       29.1 C
+
+  reading  2: Main Line Pressure (ID 2, Pressure)
+  ALERT  Main Line Pressure       95 kPa below 98 kPa
+
+  reading  3: Backup Battery (ID 3, Battery)
+  ALERT  Backup Battery         3.16 V  below 3.30 V
+
+  reading  4: Cold Room Temp (ID 4, Temperature)
+  ALERT  Cold Room Temp         37.6 C  above 35.0 C
+
+  reading  5: Server Rack Temp (ID 5, Temperature)
+  ALERT  Server Rack Temp       37.9 C  above 35.0 C
+
+  reading  6: Boiler Room Temp (ID 1, Temperature)
+  normal Boiler Room Temp       29.8 C
+
+  reading  7: Main Line Pressure (ID 2, Pressure)
+  ALERT  Main Line Pressure       96 kPa below 98 kPa
+
+  reading  8: Backup Battery (ID 3, Battery)
+  ALERT  Backup Battery         3.02 V  below 3.30 V
+
+  reading  9: Cold Room Temp (ID 4, Temperature)
+  ALERT  Cold Room Temp         38.5 C  above 35.0 C
+
+  reading 10: Server Rack Temp (ID 5, Temperature)
+  normal Server Rack Temp       24.4 C
+  DRIFT  Server Rack Temp     moved 13.55 C since the last reading (limit 5.00)
+
+  reading 11: Boiler Room Temp (ID 1, Temperature)
+  ALERT  Boiler Room Temp       18.0 C  below 18.0 C
+  [mem] alert list 8 -> 16 slots
+  DRIFT  Boiler Room Temp     moved 11.84 C since the last reading (limit 5.00)
+
+  reading 12: Main Line Pressure (ID 2, Pressure)
+  ALERT  Main Line Pressure       97 kPa below 98 kPa
+
+  12 readings processed: 3 normal, 9 abnormal.
+
+  ------------------------- MENU -------------------------
+   1. Register a new device
+   2. Display all registered devices
+   3. Remove a device by ID
+   4. Generate simulated readings
+   5. Display detected alerts
+   6. Monitoring summary
+   7. Exit
+  --------------------------------------------------------
+  Enter choice: 
+  --- Alerts (11) ---
+
+  Device   : Main Line Pressure (ID 2)
+  Type     : Pressure
+  Reading  : 95.00 kPa
+  Expected : 98 .. 108 kPa
+  Reason   : pressure too low
+  Callback : pressure_monitor
+
+  Device   : Backup Battery (ID 3)
+  Type     : Battery
+  Reading  : 3.16 V
+  Expected : 3.30 .. 4.20 V
+  Reason   : battery voltage critically low
+  Callback : battery_monitor
+
+  Device   : Cold Room Temp (ID 4)
+  Type     : Temperature
+  Reading  : 37.62 C
+  Expected : 18.0 .. 35.0 C
+  Reason   : temperature too high
+  Callback : temperature_monitor
+
+  Device   : Server Rack Temp (ID 5)
+  Type     : Temperature
+  Reading  : 37.94 C
+  Expected : 18.0 .. 35.0 C
+  Reason   : temperature too high
+  Callback : temperature_monitor
+
+  Device   : Main Line Pressure (ID 2)
+  Type     : Pressure
+  Reading  : 96.00 kPa
+  Expected : 98 .. 108 kPa
+  Reason   : pressure too low
+  Callback : pressure_monitor
+
+  Device   : Backup Battery (ID 3)
+  Type     : Battery
+  Reading  : 3.02 V
+  Expected : 3.30 .. 4.20 V
+  Reason   : battery voltage critically low
+  Callback : battery_monitor
+
+  Device   : Cold Room Temp (ID 4)
+  Type     : Temperature
+  Reading  : 38.45 C
+  Expected : 18.0 .. 35.0 C
+  Reason   : temperature too high
+  Callback : temperature_monitor
+
+  Device   : Server Rack Temp (ID 5)
+  Type     : Temperature
+  Reading  : 24.39 C
+  Expected : change between readings
+  Reason   : sensor drift suspected
+  Callback : drift_monitor
+
+  Device   : Boiler Room Temp (ID 1)
+  Type     : Temperature
+  Reading  : 17.99 C
+  Expected : 18.0 .. 35.0 C
+  Reason   : temperature too low
+  Callback : temperature_monitor
+
+  Device   : Boiler Room Temp (ID 1)
+  Type     : Temperature
+  Reading  : 17.99 C
+  Expected : change between readings
+  Reason   : sensor drift suspected
+  Callback : drift_monitor
+
+  Device   : Main Line Pressure (ID 2)
+  Type     : Pressure
+  Reading  : 97.00 kPa
+  Expected : 98 .. 108 kPa
+  Reason   : pressure too low
+  Callback : pressure_monitor
+
+  ------------------------- MENU -------------------------
+   1. Register a new device
+   2. Display all registered devices
+   3. Remove a device by ID
+   4. Generate simulated readings
+   5. Display detected alerts
+   6. Monitoring summary
+   7. Exit
+  --------------------------------------------------------
+  Enter choice: 
+  ================ MONITORING SUMMARY ================
+  Registered devices     : 5
+  Readings processed     : 12
+  Normal readings        : 3
+  Abnormal readings      : 9
+  Alerts stored          : 11
+  ----------------------------------------------------
+  Alerts by device type:
+    Temperature sensor   : 6
+    Pressure sensor      : 3
+    Battery monitor      : 2
+  ----------------------------------------------------
+  Custom callback (Sensor Drift Detector)
+    Readings flagged as drift: 2
+  ====================================================
+
+  ------------------------- MENU -------------------------
+   1. Register a new device
+   2. Display all registered devices
+   3. Remove a device by ID
+   4. Generate simulated readings
+   5. Display detected alerts
+   6. Monitoring summary
+   7. Exit
+  --------------------------------------------------------
+  Enter choice:   Device ID to remove:   Removing Server Rack Temp (ID 5).
+  Removed. Devices now: 4 (capacity 8).
+
+  ------------------------- MENU -------------------------
+   1. Register a new device
+   2. Display all registered devices
+   3. Remove a device by ID
+   4. Generate simulated readings
+   5. Display detected alerts
+   6. Monitoring summary
+   7. Exit
+  --------------------------------------------------------
+  Enter choice: 
+  ================ MONITORING SUMMARY ================
+  Registered devices     : 4
+  Readings processed     : 12
+  Normal readings        : 3
+  Abnormal readings      : 9
+  Alerts stored          : 11
+  ----------------------------------------------------
+  Alerts by device type:
+    Temperature sensor   : 6
+    Pressure sensor      : 3
+    Battery monitor      : 2
+  ----------------------------------------------------
+  Custom callback (Sensor Drift Detector)
+    Readings flagged as drift: 2
+  ====================================================
+
+  ------------------------- MENU -------------------------
+   1. Register a new device
+   2. Display all registered devices
+   3. Remove a device by ID
+   4. Generate simulated readings
+   5. Display detected alerts
+   6. Monitoring summary
+   7. Exit
+  --------------------------------------------------------
+  Enter choice: 
+  Exiting.
+
+  All memory released. Goodbye.

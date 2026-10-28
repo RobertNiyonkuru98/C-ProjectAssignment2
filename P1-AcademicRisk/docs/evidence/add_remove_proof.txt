@@ -1,0 +1,435 @@
+  [mem] capacity 0 -> 10 (initial calloc)
+  [mem] capacity 10 -> 20 (grew)
+
+  ==================================================================
+  Student ID : YOUR-STUDENT-ID
+  Project    : Dynamic Academic Performance and Risk Analysis Engine
+  Custom     : Academic Risk Index (ARI)
+  ==================================================================
+
+  Loaded 12 starting records (capacity 20).
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 1
+
+  --- Add a new student record ---
+  Student ID: 2001
+  Full name: Growth One
+  Course: C Programming
+  Grade (0-100): 70
+  Added: Growth One (ID 2001, C Programming, 70). Records now: 13.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 1
+
+  --- Add a new student record ---
+  Student ID: 2002
+  Full name: Growth Two
+  Course: Data Structures
+  Grade (0-100): 70
+  Added: Growth Two (ID 2002, Data Structures, 70). Records now: 14.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 1
+
+  --- Add a new student record ---
+  Student ID: 2003
+  Full name: Growth Three
+  Course: Database Systems
+  Grade (0-100): 70
+  Added: Growth Three (ID 2003, Database Systems, 70). Records now: 15.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 1
+
+  --- Add a new student record ---
+  Student ID: 2004
+  Full name: Growth Four
+  Course: Digital Electronics
+  Grade (0-100): 70
+  Added: Growth Four (ID 2004, Digital Electronics, 70). Records now: 16.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 1
+
+  --- Add a new student record ---
+  Student ID: 2005
+  Full name: Growth Five
+  Course: C Programming
+  Grade (0-100): 70
+  Added: Growth Five (ID 2005, C Programming, 70). Records now: 17.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 1
+
+  --- Add a new student record ---
+  Student ID: 2006
+  Full name: Growth Six
+  Course: Operating Systems
+  Grade (0-100): 70
+  Added: Growth Six (ID 2006, Operating Systems, 70). Records now: 18.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 1
+
+  --- Add a new student record ---
+  Student ID: 2007
+  Full name: Growth Seven
+  Course: Database Systems
+  Grade (0-100): 70
+  Added: Growth Seven (ID 2007, Database Systems, 70). Records now: 19.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 1
+
+  --- Add a new student record ---
+  Student ID: 2008
+  Full name: Growth Eight
+  Course: Data Structures
+  Grade (0-100): 70
+  Added: Growth Eight (ID 2008, Data Structures, 70). Records now: 20.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 1
+
+  --- Add a new student record ---
+  [mem] capacity 20 -> 40 (grew)
+  Student ID: 2009
+  Full name: Growth Nine
+  Course: Mathematics for Computing
+  Grade (0-100): 70
+  Added: Growth Nine (ID 2009, Mathematics for Computing, 70). Records now: 21.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 7
+  Student ID to remove: 2009
+  Removing Growth Nine (ID 2009, grade 70).
+  Removed. Records now: 20 (capacity 40).
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 7
+  Student ID to remove: 2008
+  Removing Growth Eight (ID 2008, grade 70).
+  Removed. Records now: 19 (capacity 40).
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 7
+  Student ID to remove: 2007
+  Removing Growth Seven (ID 2007, grade 70).
+  Removed. Records now: 18 (capacity 40).
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 7
+  Student ID to remove: 2006
+  Removing Growth Six (ID 2006, grade 70).
+  Removed. Records now: 17 (capacity 40).
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 7
+  Student ID to remove: 2005
+  Removing Growth Five (ID 2005, grade 70).
+  Removed. Records now: 16 (capacity 40).
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 7
+  Student ID to remove: 2004
+  Removing Growth Four (ID 2004, grade 70).
+  Removed. Records now: 15 (capacity 40).
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 7
+  Student ID to remove: 2003
+  Removing Growth Three (ID 2003, grade 70).
+  Removed. Records now: 14 (capacity 40).
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 7
+  Student ID to remove: 2002
+  Removing Growth Two (ID 2002, grade 70).
+  Removed. Records now: 13 (capacity 40).
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 7
+  Student ID to remove: 2001
+  Removing Growth One (ID 2001, grade 70).
+  Removed. Records now: 12 (capacity 40).
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 7
+  Student ID to remove: 1012
+  Removing Jean Paul Rwigema (ID 1012, grade 61).
+  Removed. Records now: 11 (capacity 40).
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 7
+  Student ID to remove: 1011
+  Removing Divine Mutoni (ID 1011, grade 82).
+  [mem] capacity 40 -> 20 (shrunk)
+  Removed. Records now: 10 (capacity 20).
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 9
+
+  ===================== SUMMARY REPORT =====================
+  Total student records : 10
+  Average grade         : 61.70
+  Highest grade         : 91 (Chantal Umutoni, ID 1007)
+  Lowest grade          : 33 (Fabrice Nshuti, ID 1010)
+  Pass threshold        : 50
+  Students passing      : 7
+  Students below pass   : 3
+  Memory in use         : 10 records in 20 slots
+  ----------------------------------------------------------
+  Custom analysis (Academic Risk Index):
+    Cohort ARI mean     : 6.9
+    Moderate/High risk  : 0 student(s) with ARI >= 50
+  ==========================================================
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 10
+
+  Exiting.
+
+  All memory released. Goodbye.
