@@ -71,3 +71,27 @@ void shrink_if_parse(StudentList *list) {
   list->capacity = new_capacity;
   printf("  [mem] capacity %d -> %d (shrunk)\n", old_capacity, new_capacity);
 }
+
+int find_index_by_id(StudentList *list, int id) {
+  Student *p;
+
+  for (p = list->items; p < list->items + list->count; p++) {
+    if (p->id == id) {
+      return (int)(p - list->items);
+    }
+  }
+  return -1;
+}
+
+double list_average(const StudentList *list) {
+  const Student *p;
+  double total = 0.0;
+
+  if (list->count == 0) {
+    return 0.0;
+  }
+  for (p = list->items; p < list->items + list->count; p++) {
+    total = total + (double)p->grade;
+  }
+  return total / (double)list->count;
+}
