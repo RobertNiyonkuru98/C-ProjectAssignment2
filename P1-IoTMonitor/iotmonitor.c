@@ -158,3 +158,36 @@ int find_device_index(const Monitor *m, int id) {
       return i;
   return -1;
 }
+
+void add_alert(Device *d, const char *expected, const char *reason,
+               const char *callback, float value) {
+  Monitor *m = g_monitor;
+  Alert *grown;
+  Alert *a;
+
+  if (m == NULL)
+    return;
+  if (m->alert_count >= m->alert_capacity) {
+    int new_cap = m->alert_capacity * 2;
+
+    grown = realloc(m->alerts, new_cap * sizeof(Alert));
+    if (grown == NULL) {
+      printf("  [mem] could not grow the alert list - alert not stored.\n");
+      return;
+    }
+    printf("  [mem] alert list %d -> %d slots\n", m->alert_capacity, new_cap);
+    m->alerts = grown;
+    m->alert_capacity = new_cap;
+  }
+
+  a = &m->alerts[m->alert_count++];
+  a->device_id = d->id;
+  strcpy(a->device_name, d->name);
+  a->type = d->type;
+  a->value = value;
+  strcpy(a->unit, type_unit(d->type));
+  strcpy(a->expected, expected);
+  strcpy(a->reason, reason);
+  strcpy(a->callback, callback);
+  m->alerts_by_type[d->type]++;
+}
