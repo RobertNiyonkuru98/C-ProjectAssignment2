@@ -115,3 +115,46 @@ int ask_int(const char *prompt, int low, int high, const char *not_number,
     return 1;
   }
 }
+
+int ensure_device_capacity(Monitor *m, int needed) {
+  int new_cap = m->capacity;
+  Device *grown;
+
+  if (needed <= m->capacity)
+    return 1;
+  while (new_cap < needed)
+    new_cap *= 2;
+  grown = realloc(m->devices, new_cap * sizeof(Device));
+  if (grown == NULL) {
+    printf("  [mem] could not grow the device list - operation cancelled.\n");
+    return 0;
+  }
+  printf("  [mem] device list %d -> %d slots\n", m->capacity, new_cap);
+  m->devices = grown;
+  m->capacity = new_cap;
+  return 1;
+}
+
+void shrink_device_list(Monitor *m) {
+  int new_cap;
+  Device *shrunk;
+
+  if (m->capacity <= 4 || m->count > m->capacity / 4)
+    return;
+  new_cap = m->capacity / 2 < 4 ? 4 : m->capacity / 2;
+  shrunk = realloc(m->devices, new_cap * sizeof(Device));
+  if (shrunk == NULL)
+    return;
+  printf("  [mem] device list %d -> %d slots (shrunk)\n", m->capacity, new_cap);
+  m->devices = shrunk;
+  m->capacity = new_cap;
+}
+
+int find_device_index(const Monitor *m, int id) {
+  int i;
+
+  for (i = 0; i < m->count; i++)
+    if (m->devices[i].id == id)
+      return i;
+  return -1;
+}
