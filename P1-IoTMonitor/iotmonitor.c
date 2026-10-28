@@ -367,3 +367,153 @@ void register_device(Monitor *m) {
   printf("  Registered %s (ID %d, %s). Devices now: %d.\n", d.name, d.id,
          type_name(d.type), m->count);
 }
+
+void display_devices(Monitor *m) {
+  const Device *p;
+
+  if (m->count == 0) {
+    printf("\n  No devices registered.\n");
+    return;
+  }
+  printf("\n  --- Registered devices (%d) ---\n", m->count);
+  printf("  %-5s %-22s %-12s %10s  %s\n  %-5s %-22s %-12s %10s  %s\n", "ID",
+         "Name", "Type", "Reading", "Status", "-----", "----------------------",
+         "------------", "----------", "------");
+
+  for (p = m->devices; p < m->devices + m->count; p++) {
+    char reading[32];
+
+    if (p->type == 1)
+      sprintf(reading, "%.1f C", p->reading.temperature);
+    else if (p->type == 3)
+      sprintf(reading, "%d kPa", p->reading.pressure);
+    else
+      sprintf(reading, "%.2f V", p->reading.voltage);
+
+    printf("  %-5d %-22s %-12s %10s  %s\n", p->id, p->name, type_name(p->type),
+           reading, p->status == 0 ? "normal" : "ALERT");
+  }
+}
+
+void remove_device(Monitor *m) {
+  int value, index, i, status;
+
+  if (m->count == 0) {
+    printf("\n  No devices to remove.\n");
+    return;
+  }
+  status = read_int("  Device ID to remove: ", &value);
+  if (status == 0) {
+    printf("\n  Input closed - removal cancelled.\n");
+    return;
+  }
+  if (status == -1) {
+    printf("  Invalid: enter a whole number.\n");
+    return;
+  }
+  index = find_device_index(m, value);
+  if (index < 0) {
+    printf("  No device with ID %d - nothing removed.\n", value);
+    return;
+  }
+
+  printf("  Removing %s (ID %d).\n", m->devices[index].name,
+         m->devices[index].id);
+  for (i = index; i + 1 < m->count; i++)
+    m->devices[i] = m->devices[i + 1];
+  m->count--;
+  shrink_device_list(m);
+  printf("  Removed. Devices now: %d (capacity %d).\n", m->count, m->capacity);
+}
+
+void simulate_readings(Monitor *m) {
+  int r, i, forced;
+  Device *d;
+  float value;
+
+  if (m->count == 0) {
+    printf("\n  No devices registered - nothing to simulate.\n");
+    return;
+  }
+  printf("\n  --- Simulating %d readings ---\n", 12);
+
+  for (r = 0; r < 12; r++) {
+    i = r % m->count;
+    d = &m->devices[i];
+    // every fourth reading is pushed outside the limits so the alert path runs
+    forced = (r % 4 == 3);
+
+    if (d->type == 1) {
+      value = forced ? random_float(36.0f, 45.0f) : random_float(15.0f, 45.0f);
+      d->reading.temperature = value;
+    } else if (d->type == 3) {
+      value = forced ? random_float(95.0f, 97.0f) : random_float(95.0f, 110.0f);
+      d->reading.pressure = (int)(value + 0.5f);
+    } else {
+      value = forced ? random_float(3.0f, 3.2f) : random_float(3.0f, 4.2f);
+      d->reading.voltage = value;
+    }
+
+    m->readings_processed++;
+    printf("\n  reading %2d: %s (ID %d, %s)\n", r + 1, d->name, d->id,
+           type_name(d->type));
+
+    // type callback through a function pointer, then the custom callback
+    process_device(d, callback_for_type(d->type));
+    process_device(d, drift_monitor);
+
+    if (d->status == 0)
+      m->normal_readings++;
+    else
+      m->abnormal_readings++;
+  }
+
+  printf("\n  %d readings processed: %d normal, %d abnormal.\n", 12,
+         m->normal_readings, m->abnormal_readings);
+}
+
+void display_alerts(Monitor *m) {
+  const Alert *a;
+
+  if (m->alert_count == 0) {
+    printf("\n  No alerts have been raised yet.\n");
+    return;
+  }
+  printf("\n  --- Alerts (%d) ---\n", m->alert_count);
+  for (a = m->alerts; a < m->alerts + m->alert_count; a++)
+    printf("\n  Device   : %s (ID %d)\n"
+           "  Type     : %s\n"
+           "  Reading  : %.2f %s\n"
+           "  Expected : %s\n"
+           "  Reason   : %s\n"
+           "  Callback : %s\n",
+           a->device_name, a->device_id, type_name(a->type), a->value, a->unit,
+           a->expected, a->reason, a->callback);
+}
+
+void monitoring_summary(Monitor *m) {
+  printf("\n  ================ MONITORING SUMMARY ================\n"
+         "  Registered devices     : %d\n"
+         "  Readings processed     : %d\n"
+         "  Normal readings        : %d\n"
+         "  Abnormal readings      : %d\n"
+         "  Alerts stored          : %d\n"
+         "  ----------------------------------------------------\n"
+         "  Alerts by device type:\n"
+         "    Temperature sensor   : %d\n"
+         "    Pressure sensor      : %d\n"
+         "    Battery monitor      : %d\n"
+         "  ----------------------------------------------------\n"
+         "  Custom callback (Sensor Drift Detector)\n"
+         "    Readings flagged as drift: %d\n"
+         "  ====================================================\n",
+         m->count, m->readings_processed, m->normal_readings,
+         m->abnormal_readings, m->alert_count, m->alerts_by_type[1],
+         m->alerts_by_type[3], m->alerts_by_type[3], m->drift_flags);
+}
+
+void quit_program(Monitor *m) {
+  (void)m;
+  g_running = 0;
+  printf("\n  Exiting.\n");
+}
