@@ -43,3 +43,31 @@ int ensure_capacity(StudentList *list, int needed) {
   printf("Memory capacity %d -> %d (grew)\n", old_capacity, new_capacity);
   return 1;
 }
+
+void shrink_if_parse(StudentList *list) {
+  int new_capacity;
+  int old_capacity;
+  Student *shrunk;
+
+  if (list->capacity <= 10) {
+    return;
+  }
+  if (list->count > list->capacity / 4) {
+    return;
+  }
+
+  new_capacity = list->capacity / 2;
+  if (new_capacity < 10) {
+    new_capacity = 10;
+  }
+
+  shrunk = realloc(list->items, new_capacity * sizeof(Student));
+  if (shrunk == NULL) {
+    return;
+  }
+
+  old_capacity = list->capacity;
+  list->items = shrunk;
+  list->capacity = new_capacity;
+  printf("  [mem] capacity %d -> %d (shrunk)\n", old_capacity, new_capacity);
+}
