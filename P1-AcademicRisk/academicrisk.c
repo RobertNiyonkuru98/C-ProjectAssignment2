@@ -1,5 +1,7 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct {
   int id;
@@ -121,4 +123,75 @@ int idAscCompare(void *a, void *b) {
   Student *sa = (Student *)a;
   Student *sb = (Student *)b;
   return sa->id - sb->id;
+}
+
+int read_line(char *buf, int size) {
+  int len;
+  int ch;
+  int overflow = 0;
+
+  if (fgets(buf, size, stdin) == NULL) {
+    buf[0] = '\0';
+    return 0;
+  }
+
+  len = strlen(buf);
+  if (len > 0 && buf[len - 1] == '\n') {
+    buf[len - 1] = '\0';
+    return 1;
+  }
+
+  while ((ch = getchar()) != '\n' && ch != EOF) {
+    overflow = 1;
+  }
+  return overflow ? -1 : 1;
+}
+
+int read_int(const char *prompt, int *out) {
+  char buf[64];
+  char *end;
+  long value;
+  int status;
+
+  printf("%s", prompt);
+  status = read_line(buf, sizeof buf);
+
+  if (status == 0) {
+    return 0;
+  }
+  if (status == -1) {
+    return -1;
+  }
+
+  value = strtol(buf, &end, 10);
+  if (end == buf) {
+    return -1;
+  }
+  while (*end != '\0' && isspace((unsigned char)*end)) {
+    end++;
+  }
+  if (*end != '\0') {
+    return -1;
+  }
+
+  *out = (int)value;
+  return 1;
+}
+
+int is_valid_name(const char *s) {
+  int i;
+  int has_letter = 0;
+
+  if (s[0] == '\0') {
+    return 0;
+  }
+  for (i = 0; s[i] != '\0'; i++) {
+    unsigned char c = (unsigned char)s[i];
+    if (isalpha(c)) {
+      has_letter = 1;
+    } else if (c != ' ' && c != '-' && c != '\'') {
+      return 0;
+    }
+  }
+  return has_letter;
 }
