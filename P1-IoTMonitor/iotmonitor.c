@@ -68,7 +68,6 @@ float random_float(float low, float high) {
   return low + ((float)rand() / (float)RAND_MAX) * (high - low);
 }
 
-// 1 = line read, 0 = end of input, -1 = line longer than the buffer
 int read_line(char *buf, int size) {
   int len, ch, overflow = 0;
 
@@ -351,7 +350,6 @@ void register_device(Monitor *m) {
   }
   d.type = value;
 
-  // only the union member belonging to this type is touched
   if (d.type == 1)
     d.reading.temperature = 0.0f;
   else if (d.type == 2)
@@ -440,7 +438,7 @@ void simulate_readings(Monitor *m) {
   for (r = 0; r < 12; r++) {
     i = r % m->count;
     d = &m->devices[i];
-    // every fourth reading is pushed outside the limits so the alert path runs
+
     forced = (r % 4 == 3);
 
     if (d->type == 1) {
@@ -458,7 +456,6 @@ void simulate_readings(Monitor *m) {
     printf("\n  reading %2d: %s (ID %d, %s)\n", r + 1, d->name, d->id,
            type_name(d->type));
 
-    // type callback through a function pointer, then the custom callback
     process_device(d, callback_for_type(d->type));
     process_device(d, drift_monitor);
 
@@ -516,4 +513,103 @@ void quit_program(Monitor *m) {
   (void)m;
   g_running = 0;
   printf("\n  Exiting.\n");
+}
+
+Operation operations[] = {
+    register_device, display_devices,    remove_device, simulate_readings,
+    display_alerts,  monitoring_summary, quit_program};
+
+const char *menu_labels[] = {"Register a new device",
+                             "Display all registered devices",
+                             "Remove a device by ID",
+                             "Generate simulated readings",
+                             "Display detected alerts",
+                             "Monitoring summary",
+                             "Exit"};
+
+int MENU_COUNT = sizeof(operations) / sizeof(operations[0]);
+
+void print_header(void) {
+  printf(
+      "\n  ==================================================================\n"
+      "  Student ID : %s\n"
+      "  Project    : Dynamic IoT Event Monitoring and Callback Engine\n"
+      "  Custom     : Sensor Drift Detector (callback)\n"
+      "  ==================================================================\n",
+      "1000");
+}
+
+void print_menu(void) {
+  int i;
+
+  printf("\n  ------------------------- MENU -------------------------\n");
+  for (i = 0; i < MENU_COUNT; i++)
+    printf("  %2d. %s\n", i + 1, menu_labels[i]);
+  printf("  --------------------------------------------------------\n");
+}
+
+Device seed_devices[] = {{1, "Boiler Room Temp", 1, {0.0f}, 0, 0.0f, 0},
+                         {2, "Main Line Pressure", 2, {0}, 0, 0.0f, 0},
+                         {3, "Backup Battery", 3, {0.0f}, 0, 0.0f, 0},
+                         {4, "Cold Room Temp", 1, {0.0f}, 0, 0.0f, 0}};
+
+int SEED_COUNT = sizeof(seed_devices) / sizeof(seed_devices[0]);
+
+int main() {
+  Monitor m;
+  int status, choice, i;
+
+  srand((unsigned)time(NULL));
+
+  m.capacity = 4;
+  m.count = 0;
+  m.devices = calloc(4, sizeof(Device));
+  m.alert_capacity = 8;
+  m.alert_count = 0;
+  m.alerts = calloc(8, sizeof(Alert));
+  m.readings_processed = 0;
+  m.normal_readings = 0;
+  m.abnormal_readings = 0;
+  m.drift_flags = 0;
+  for (i = 0; i < 4; i++)
+    m.alerts_by_type[i] = 0;
+
+  if (m.devices == NULL || m.alerts == NULL) {
+    printf("Error: could not allocate memory for the device or alert list.\n");
+    return 1;
+  }
+  g_monitor = &m;
+
+  printf("  [mem] device list 0 -> %d slots\n", 4);
+  printf("  [mem] alert list 0 -> %d slots\n", 8);
+  for (i = 0; i < SEED_COUNT; i++) {
+    if (!ensure_device_capacity(&m, m.count + 1))
+      break;
+    m.devices[m.count++] = seed_devices[i];
+  }
+
+  print_header();
+  printf("\n  Loaded %d starting devices (capacity %d).\n", m.count,
+         m.capacity);
+
+  while (g_running) {
+    print_menu();
+    status = read_int("  Enter choice: ", &choice);
+    if (status == 0) {
+      printf("\n  Input closed.\n");
+      break;
+    }
+    if (status == -1 || choice < 1 || choice > MENU_COUNT) {
+      printf("  Invalid: enter a number from 1 to %d.\n", MENU_COUNT);
+      continue;
+    }
+    operations[choice - 1](&m);
+  }
+
+  free(m.devices);
+  free(m.alerts);
+  m.devices = NULL;
+  m.alerts = NULL;
+  printf("\n  All memory released. Goodbye.\n");
+  return 0;
 }
