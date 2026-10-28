@@ -95,3 +95,30 @@ double list_average(const StudentList *list) {
   }
   return total / (double)list->count;
 }
+
+int gradeDescCompare(void *a, void *b) {
+  Student *sa = (Student *)a;
+  Student *sb = (Student *)b;
+
+  if (sa->grade != sb->grade) {
+    return (sa->grade < sb->grade) - (sa->grade > sb->grade);
+  }
+  return sa->id - sb->id;
+}
+
+int nameAscCompare(void *a, void *b) {
+  Student *sa = (Student *)a;
+  Student *sb = (Student *)b;
+  int by_name = str_compare_insensitive(sa->name, sb->name);
+
+  if (by_name != 0) {
+    return by_name;
+  }
+  return sa->id - sb->id;
+}
+
+int idAscCompare(void *a, void *b) {
+  Student *sa = (Student *)a;
+  Student *sb = (Student *)b;
+  return sa->id - sb->id;
+}
