@@ -325,3 +325,39 @@ void custom_analysis(Text *t) {
   printf("  Note: short texts score higher simply because there is less\n"
          "  chance to repeat a word.\n");
 }
+
+void generate_text_summary(Text *t) {
+  int i, best_count = 0, best_index = 0, best_len = 0, longest_index = 0;
+  double total_length = 0;
+
+  if (t->total_words == 0) {
+    printf("\n  There is nothing to summarise.\n");
+    return;
+  }
+  for (i = 0; i < t->distinct; i++) {
+    int len = (int)strlen(t->stats[i].name);
+    total_length += len;
+    if (t->stats[i].count > best_count) {
+      best_count = t->stats[i].count;
+      best_index = i;
+    }
+    if (len > best_len) {
+      best_len = len;
+      longest_index = i;
+    }
+  }
+
+  printf("\n  ================= TEXT SUMMARY =================\n"
+         "  Source              : %s\n"
+         "  Total words         : %d\n"
+         "  Distinct words      : %d\n"
+         "  Average word length : %.2f characters\n"
+         "  Longest word        : %s (%d characters)\n"
+         "  Most frequent word  : %s (%d times)\n"
+         "  Lexical diversity   : %.1f%%\n"
+         "  ===============================================\n",
+         "Abraham Lincorn, The Gettysburg Address (1863)", t->total_words,
+         t->distinct, total_length / t->distinct, t->stats[longest_index].name,
+         best_len, t->stats[best_index].name, best_count,
+         100.0 * t->distinct / t->total_words);
+}
