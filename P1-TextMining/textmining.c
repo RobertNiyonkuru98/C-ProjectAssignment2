@@ -231,3 +231,34 @@ int cmp_count_desc(const void *a, const void *b) {
   int d = sb->count - sa->count;
   return d != 0 ? d : strcmp(sa->name, sb->name);
 }
+
+void sort_word_statistics(Text *t) {
+  char buffer[8];
+  int choice;
+  int (*comparator)(const void *, const void *);
+
+  if (t->distinct < 2) {
+    printf("\n  Nothing to sort.\n");
+    return;
+  }
+  printf("\n  Sort by:\n    1. Alphabetical\n    2. Frequency (highest "
+         "first)\n");
+  printf("  Choice: ");
+  if (read_line(buffer, 8) == 0) {
+    printf("\n  Input closed - sort cancelled.\n");
+    return;
+  }
+  choice = atoi(buffer);
+  if (choice == 1)
+    comparator = cmp_alpha;
+  else if (choice == 2)
+    comparator = cmp_count_desc;
+  else {
+    printf("  Invalid choice - sort cancelled.\n");
+    return;
+  }
+
+  qsort(t->stats, t->distinct, sizeof(wordStat), comparator);
+  printf("  Sorted.\n");
+  display_word_statistics(t);
+}
