@@ -159,3 +159,51 @@ void load_text(Text *t) {
   printf("  Text loaded: %d characters, %d words, %d distinct words.\n",
          t->text_len, t->total_words, t->distinct);
 }
+
+void count_words(Text *t) {
+  if (t->total_words == 0) {
+    printf("\n  The text has no words.\n");
+    return;
+  }
+  printf("\n  Total words: %d\n", t->total_words);
+  printf("  Characters in the text: %d\n", t->text_len);
+  if (t->truncated_words > 0)
+    printf("  Words longer than %d characters were shortened: %d\n", 40 - 1,
+           t->truncated_words);
+}
+
+void longest_word(Text *t) {
+  int i, best = 0, best_len = 0;
+
+  if (t->distinct == 0) {
+    printf("\n  The text has no words.\n");
+    return;
+  }
+  for (i = 0; i < t->distinct; i++) {
+    int len = (int)strlen(t->stats[i].name);
+    if (len > best_len) {
+      best_len = len;
+      best = i;
+    }
+  }
+  printf("\n  Longest word: \"%s\" (%d characters)\n", t->stats[best].name,
+         best_len);
+  if (best_len >= 40 - 1)
+    printf("  Note: this word may have been shortened to fit the %d "
+           "character field.\n",
+           40 - 1);
+}
+
+void most_frequent(Text *t) {
+  int i, best = 0;
+
+  if (t->distinct == 0) {
+    printf("\n  The text has no words.\n");
+    return;
+  }
+  for (i = 1; i < t->distinct; i++)
+    if (t->stats[i].count > t->stats[best].count)
+      best = i;
+  printf("\n  Most frequent word: \"%s\" used %d times.\n", t->stats[best].name,
+         t->stats[best].count);
+}
