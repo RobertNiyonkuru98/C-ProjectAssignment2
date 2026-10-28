@@ -117,3 +117,45 @@ void build_stats(Text *t) {
       return;
   }
 }
+
+int read_line(char *buf, int size) {
+  int len, ch, overflow = 0;
+
+  if (fgets(buf, size, stdin) == NULL)
+    return buf[0] = '\0', 0;
+  len = strlen(buf);
+  if (len > 0 && buf[len - 1] == '\n')
+    return buf[len - 1] = '\0', 1;
+  while ((ch = getchar()) != '\n' && ch != EOF)
+    overflow = 1;
+  return overflow ? -1 : 1;
+}
+
+void load_text(Text *t) {
+  char line[512];
+  int status;
+
+  printf("\n  Paste or type the paragraph. Finish with a line containing only "
+         "a dot (.)\n");
+  t->text_len = 0;
+  t->text[0] = '\0';
+
+  for (;;) {
+    printf("  > ");
+    status = read_line(line, 512);
+    if (status == 0)
+      break;
+    if (status == -1) {
+      printf("  That line was too long and was skipped.\n");
+      continue;
+    }
+    if (strcmp(line, ".") == 0)
+      break;
+    if (!append_text(t, line) || !append_text(t, " "))
+      return;
+  }
+
+  build_stats(t);
+  printf("  Text loaded: %d characters, %d words, %d distinct words.\n",
+         t->text_len, t->total_words, t->distinct);
+}
