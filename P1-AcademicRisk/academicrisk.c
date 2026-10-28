@@ -302,3 +302,21 @@ void add_student(StudentList *list) {
   printf("  Added: %s (ID %d, %s, %d). Records now: %d.\n", record.name,
          record.id, record.course, record.grade, list->count);
 }
+
+void display_students(StudentList *list) {
+  const Student *p;
+
+  if (list->count == 0) {
+    printf("\n  No records to display.\n");
+    return;
+  }
+
+  printf("\n  --- Student records (%d) ---\n", list->count);
+  printf("  %-6s %-24s %-26s %s\n", "ID", "Name", "Course", "Grade");
+  printf("  %-6s %-24s %-26s %s\n", "------", "------------------------",
+         "--------------------------", "-----");
+
+  for (p = list->items; p < list->items + list->count; p++) {
+    printf("  %-6d %-24s %-26s %3d\n", p->id, p->name, p->course, p->grade);
+  }
+}
