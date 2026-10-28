@@ -694,3 +694,72 @@ void quit_program(StudentList *list) {
   g_running = 0;
   printf("\n  Exiting.\n");
 }
+
+Operation operations[] = {
+    add_student,       display_students, sort_students,
+    calculate_average, find_top_student, search_student,
+    remove_student,    custom_analysis,  generate_summary_report,
+    quit_program};
+
+const char *menu_labels[] = {"Add a new student record",
+                             "Display all student records",
+                             "Sort students (by grade / name / ID)",
+                             "Calculate the average grade",
+                             "Find the top performing student",
+                             "Search for a student (by ID / name)",
+                             "Remove a student record",
+                             "Custom analysis - Academic Risk Index",
+                             "Display the summary report",
+                             "Exit"};
+
+int MENU_COUNT = sizeof(operations) / sizeof(operations[0]);
+
+void print_header(void) {
+  printf("\n");
+  printf(
+      "  ==================================================================\n");
+  printf("  Student ID : %s\n", "1000");
+  printf("  Project    : Dynamic Academic Performance and Risk Analysis "
+         "Engine\n");
+  printf("  Custom     : Academic Risk Index (ARI)\n");
+  printf(
+      "  ==================================================================\n");
+}
+
+void print_menu(void) {
+  int i;
+
+  printf("\n  ------------------------- MENU -------------------------\n");
+  for (i = 0; i < MENU_COUNT; i++) {
+    printf("  %2d. %s\n", i + 1, menu_labels[i]);
+  }
+  printf("  --------------------------------------------------------\n");
+}
+
+Student seed_dataset[] = {
+    {1001, "Aline Uwase", "C Programming", 88},
+    {1002, "Kevin Niyonzima", "Data Structures", 74},
+    {1003, "Diane Mukamana", "Database Systems", 65},
+    {1004, "Eric Habimana", "Digital Electronics", 52},
+    {1005, "Grace Iradukunda", "C Programming", 47},
+    {1006, "Samuel Nkurunziza", "Mathematics for Computing", 39},
+    {1007, "Chantal Umutoni", "Operating Systems", 91},
+    {1008, "Patrick Bizimana", "Data Structures", 70},
+    {1009, "Josiane Ineza", "Database Systems", 58},
+    {1010, "Fabrice Nshuti", "Digital Electronics", 33},
+    {1011, "Divine Mutoni", "C Programming", 82},
+    {1012, "Jean Paul Rwigema", "Mathematics for Computing", 61}};
+
+int SEED_COUNT = 12;
+
+void load_seed_dataset(StudentList *list) {
+  int i;
+
+  for (i = 0; i < SEED_COUNT; i++) {
+    if (!ensure_capacity(list, list->count + 1)) {
+      return;
+    }
+    list->items[list->count] = seed_dataset[i];
+    list->count++;
+  }
+}
