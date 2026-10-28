@@ -386,3 +386,44 @@ void quit_program(Text *t) {
   g_running = 0;
   printf("\n  Exiting.\n");
 }
+
+Analysis analyses[] = {count_words,           longest_word,
+                       most_frequent,         display_word_statistics,
+                       sort_word_statistics,  search_word,
+                       generate_text_summary, custom_analysis,
+                       show_memory_addresses, load_text,
+                       quit_program};
+
+const char *menu_labels[] = {"Count the words in the text",
+                             "Find the longest word",
+                             "Find the most frequent word",
+                             "Show every word and its frequency",
+                             "Sort the word list (alphabetical / frequency)",
+                             "Search for a word",
+                             "Show the text summary",
+                             "Custom analysis - Lexical Diversity Score",
+                             "Show the memory addresses",
+                             "Enter or paste a new paragraph",
+                             "Exit"};
+
+int MENU_COUNT = sizeof(analyses) / sizeof(analyses[0]);
+
+void print_header(void) {
+  printf(
+      "\n  ==================================================================\n"
+      "  Student ID : %s\n"
+      "  Project    : Dynamic Text Mining and Linguistic Pattern Analyzer\n"
+      "  Source     : %s\n"
+      "  Custom     : Lexical Diversity Score\n"
+      "  ==================================================================\n",
+      "1000", "Abraham Lincoln,The Gettysburg Adress (1863)");
+}
+
+void print_menu(void) {
+  int i;
+
+  printf("\n  ------------------------- MENU -------------------------\n");
+  for (i = 0; i < MENU_COUNT; i++)
+    printf("  %2d. %s\n", i + 1, menu_labels[i]);
+  printf("  --------------------------------------------------------\n");
+}
