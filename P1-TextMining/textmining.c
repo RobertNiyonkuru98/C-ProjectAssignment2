@@ -262,3 +262,37 @@ void sort_word_statistics(Text *t) {
   printf("  Sorted.\n");
   display_word_statistics(t);
 }
+
+void search_word(Text *t) {
+  char buffer[40];
+  char needle[40];
+  int i, len = 0, status;
+
+  printf("\n  Word to search for: ");
+  status = read_line(buffer, 40);
+  if (status == 0) {
+    printf("\n  Input closed - search cancelled.\n");
+    return;
+  }
+  if (status == -1) {
+    printf("  That word is too long.\n");
+    return;
+  }
+  if (buffer[0] == '\0') {
+    printf("  No word entered.\n");
+    return;
+  }
+
+  for (i = 0; buffer[i] != '\0' && len < 40 - 1; i++)
+    if (isalpha((unsigned char)buffer[i]) || buffer[i] == '\'' ||
+        buffer[i] == '-')
+      needle[len++] = (char)tolower((unsigned char)buffer[i]);
+  needle[len] = '\0';
+
+  for (i = 0; i < t->distinct; i++)
+    if (strcmp(t->stats[i].name, needle) == 0) {
+      printf("  \"%s\" appears %d time(s).\n", needle, t->stats[i].count);
+      return;
+    }
+  printf("  \"%s\" does not appear in the text.\n", needle);
+}
