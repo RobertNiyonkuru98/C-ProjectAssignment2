@@ -285,3 +285,85 @@ void drift_monitor(Device *d) {
   }
   d->last_value = value;
 }
+
+void process_device(Device *device, void (*callback)(Device *)) {
+  if (device != NULL && callback != NULL)
+    callback(device);
+}
+
+DeviceCallback callback_for_type(int type) {
+  if (type == 1)
+    return temperature_monitor;
+  if (type == 2)
+    return pressure_monitor;
+  return battery_monitor;
+}
+
+void register_device(Monitor *m) {
+  Device d;
+  int value, i;
+
+  printf("\n  --- Register a new device ---\n");
+  if (!ensure_device_capacity(m, m->count + 1))
+    return;
+
+  for (;;) {
+    if (!ask_int("  Device ID: ", 1, 2000000000,
+                 "  Invalid: enter a whole number.\n",
+                 "  Invalid: the ID must be positive.\n", &value)) {
+      printf("\n  Input closed - registration cancelled.\n");
+      return;
+    }
+    i = find_device_index(m, value);
+    if (i >= 0) {
+      printf("  Rejected: ID %d is already used by %s.\n", value,
+             m->devices[i].name);
+      continue;
+    }
+    d.id = value;
+    break;
+  }
+
+  for (;;) {
+    int name_status;
+    printf("  Device name: ");
+    name_status = read_line(d.name, 40);
+    if (name_status == 0) {
+      printf("\n  Input closed - registration cancelled.\n");
+      return;
+    }
+    if (name_status == -1) {
+      printf("  Invalid: name too long (maximum %d characters).\n", 40 - 1);
+      continue;
+    }
+    if (d.name[0] == '\0') {
+      printf("  Invalid: the name cannot be empty.\n");
+      continue;
+    }
+    break;
+  }
+
+  printf("  Device type: 1 = temperature, 2 = pressure, 3 = battery\n");
+  if (!ask_int("  Type: ", 1, 3, "  Invalid: enter 1, 2 or 3.\n",
+               "  Invalid: choose 1, 2 or 3.\n", &value)) {
+    printf("\n  Input closed - registration cancelled.\n");
+    return;
+  }
+  d.type = value;
+
+  // only the union member belonging to this type is touched
+  if (d.type == 1)
+    d.reading.temperature = 0.0f;
+  else if (d.type == 2)
+    d.reading.pressure = 0;
+  else
+    d.reading.voltage = 0.0f;
+
+  d.status = 0;
+  d.last_value = 0.0f;
+  d.has_last = 0;
+
+  m->devices[m->count++] = d;
+  printf("  Registered %s (ID %d, %s). Devices now: %d.\n", d.name, d.id,
+         type_name(d.type), m->count);
+}
