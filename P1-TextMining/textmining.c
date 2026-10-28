@@ -451,3 +451,56 @@ char *seed_text =
     "not have died in vain, that this nation, under God, shall have a new "
     "birth of freedom, and that government of the people, by the people, for "
     "the people, shall not perish from the earth.";
+
+int main() {
+  Text t;
+  int status, choice;
+
+  t.text_cap = 512;
+  t.text_len = 0;
+  t.text = calloc(512, 1);
+  t.stats_cap = 16;
+  t.distinct = 0;
+  t.stats = calloc(16, sizeof(wordStat));
+  if (!t.text || !t.stats) {
+    printf("Error: could not allocate memory for the text or the word list.\n");
+    return 1;
+  }
+
+  printf("  [mem] text buffer 0 -> %d bytes\n", 512);
+  printf("  [mem] word list 0 -> %d slots\n", 16);
+  append_text(&t, seed_text);
+  build_stats(&t);
+  print_header();
+  printf("\n  Loaded %d words, %d distinct, from the starting paragraph.\n",
+         t.total_words, t.distinct);
+
+  while (g_running) {
+    char buffer[16];
+
+    print_menu();
+    printf("  Enter choice: ");
+    status = read_line(buffer, 16);
+    if (status == 0) {
+      printf("\n  Input closed.\n");
+      break;
+    }
+    if (status == -1) {
+      printf("  Invalid: enter a number from 1 to %d.\n", MENU_COUNT);
+      continue;
+    }
+    choice = atoi(buffer);
+    if (choice < 1 || choice > MENU_COUNT) {
+      printf("  Invalid: enter a number from 1 to %d.\n", MENU_COUNT);
+      continue;
+    }
+    analyses[choice - 1](&t);
+  }
+
+  free(t.text);
+  free(t.stats);
+  t.text = NULL;
+  t.stats = NULL;
+  printf("\n  All memory released. Goodbye.\n");
+  return 0;
+}
