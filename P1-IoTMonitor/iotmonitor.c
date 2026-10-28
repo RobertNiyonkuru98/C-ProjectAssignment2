@@ -191,3 +191,63 @@ void add_alert(Device *d, const char *expected, const char *reason,
   strcpy(a->callback, callback);
   m->alerts_by_type[d->type]++;
 }
+
+void temperature_monitor(Device *d) {
+  float v = d->reading.temperature;
+
+  if (v >= 18.0f && v <= 35.0f) {
+    d->status = 0;
+    printf("  normal %-20s %6.1f C\n", d->name, v);
+    return;
+  }
+  d->status = 1;
+  if (v < 18.0f) {
+    printf("  ALERT  %-20s %6.1f C  below %.1f C\n", d->name, v, 18.0f);
+    add_alert(d, "18.0 .. 35.0 C", "temperature too low", "temperature_monitor",
+              v);
+  } else {
+    printf("  ALERT  %-20s %6.1f C  above %.1f C\n", d->name, v, 35.0f);
+    add_alert(d, "18.0 .. 35.0 C", "temperature too high",
+              "temperature_monitor", v);
+  }
+}
+
+void pressure_monitor(Device *d) {
+  int v = d->reading.pressure;
+
+  if (v >= 98 && v <= 108) {
+    d->status = 0;
+    printf("  normal %-20s %6d kPa\n", d->name, v);
+    return;
+  }
+  d->status = 1;
+  if (v < 98) {
+    printf("  ALERT  %-20s %6d kPa below %d kPa\n", d->name, v, 98);
+    add_alert(d, "98 .. 108 kPa", "pressure too low", "pressure_monitor",
+              (float)v);
+  } else {
+    printf("  ALERT  %-20s %6d kPa above %d kPa\n", d->name, v, 108);
+    add_alert(d, "98 .. 108 kPa", "pressure too high", "pressure_monitor",
+              (float)v);
+  }
+}
+
+void battery_monitor(Device *d) {
+  float v = d->reading.voltage;
+
+  if (v >= 3.3f && v <= 4.2f) {
+    d->status = 0;
+    printf("  normal %-20s %6.2f V\n", d->name, v);
+    return;
+  }
+  d->status = 1;
+  if (v < 3.3f) {
+    printf("  ALERT  %-20s %6.2f V  below %.2f V\n", d->name, v, 3.3f);
+    add_alert(d, "3.30 .. 4.20 V", "battery voltage critically low",
+              "battery_monitor", v);
+  } else {
+    printf("  ALERT  %-20s %6.2f V  above %.2f V\n", d->name, v, 4.2f);
+    add_alert(d, "3.30 .. 4.20 V", "battery voltage too high",
+              "battery_monitor", v);
+  }
+}
