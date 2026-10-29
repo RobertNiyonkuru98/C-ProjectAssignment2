@@ -1,0 +1,10 @@
+
+  structure   1/1 passed
+  sorting     4/4 passed
+  average     3/3 passed
+  top         3/3 passed
+  ari         6/6 passed
+  summary     7/7 passed
+
+
+RESULT: all 24 checks passed

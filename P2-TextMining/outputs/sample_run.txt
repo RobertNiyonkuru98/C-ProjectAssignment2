@@ -1,0 +1,408 @@
+  [mem] text buffer 0 -> 512 bytes
+  [mem] word list 0 -> 16 slots
+  [mem] text buffer 512 -> 2048 bytes
+  [mem] word list 16 -> 32 slots
+  [mem] word list 32 -> 64 slots
+  [mem] word list 64 -> 128 slots
+  [mem] word list 128 -> 256 slots
+
+  ==================================================================
+  Student ID : YOUR-STUDENT-ID
+  Project    : Dynamic Text Mining and Linguistic Pattern Analyzer
+  Source     : Abraham Lincoln, The Gettysburg Address (1863)
+  Custom     : Lexical Diversity Score
+  ==================================================================
+
+  Loaded 271 words, 138 distinct, from the starting paragraph.
+
+  ------------------------- MENU -------------------------
+   1. Count the words in the text
+   2. Find the longest word
+   3. Find the most frequent word
+   4. Show every word and its frequency
+   5. Sort the word list (alphabetical / frequency)
+   6. Search for a word
+   7. Show the text summary
+   8. Custom analysis - Lexical Diversity Score
+   9. Show the memory addresses
+  10. Enter or paste a new paragraph
+  11. Exit
+  --------------------------------------------------------
+  Enter choice: 1
+
+  Total words: 271
+  Characters in the text: 1458
+
+  ------------------------- MENU -------------------------
+   1. Count the words in the text
+   2. Find the longest word
+   3. Find the most frequent word
+   4. Show every word and its frequency
+   5. Sort the word list (alphabetical / frequency)
+   6. Search for a word
+   7. Show the text summary
+   8. Custom analysis - Lexical Diversity Score
+   9. Show the memory addresses
+  10. Enter or paste a new paragraph
+  11. Exit
+  --------------------------------------------------------
+  Enter choice: 2
+
+  Longest word: "battle-field" (12 characters)
+
+  ------------------------- MENU -------------------------
+   1. Count the words in the text
+   2. Find the longest word
+   3. Find the most frequent word
+   4. Show every word and its frequency
+   5. Sort the word list (alphabetical / frequency)
+   6. Search for a word
+   7. Show the text summary
+   8. Custom analysis - Lexical Diversity Score
+   9. Show the memory addresses
+  10. Enter or paste a new paragraph
+  11. Exit
+  --------------------------------------------------------
+  Enter choice: 3
+
+  Most frequent word: "that" used 13 times.
+
+  ------------------------- MENU -------------------------
+   1. Count the words in the text
+   2. Find the longest word
+   3. Find the most frequent word
+   4. Show every word and its frequency
+   5. Sort the word list (alphabetical / frequency)
+   6. Search for a word
+   7. Show the text summary
+   8. Custom analysis - Lexical Diversity Score
+   9. Show the memory addresses
+  10. Enter or paste a new paragraph
+  11. Exit
+  --------------------------------------------------------
+  Enter choice: 5
+
+  Sort by:
+    1. Alphabetical
+    2. Frequency (highest first)
+  Choice: 2
+  Sorted.
+
+  --- Word statistics (138 distinct words) ---
+  Word                           Count
+  ------------------------------ -----
+  that                              13
+  the                               11
+  we                                10
+  here                               8
+  to                                 8
+  a                                  7
+  and                                6
+  can                                5
+  for                                5
+  have                               5
+  it                                 5
+  nation                             5
+  not                                5
+  of                                 5
+  dedicated                          4
+  in                                 4
+  this                               4
+  are                                3
+  dead                               3
+  great                              3
+  is                                 3
+  people                             3
+  shall                              3
+  so                                 3
+  they                               3
+  us                                 3
+  who                                3
+  be                                 2
+  but                                2
+  conceived                          2
+  dedicate                           2
+  devotion                           2
+  far                                2
+  from                               2
+  gave                               2
+  living                             2
+  long                               2
+  men                                2
+  new                                2
+  on                                 2
+  or                                 2
+  our                                2
+  rather                             2
+  these                              2
+  war                                2
+  what                               2
+  which                              2
+  above                              1
+  add                                1
+  advanced                           1
+  ago                                1
+  all                                1
+  altogether                         1
+  any                                1
+  as                                 1
+  battle-field                       1
+  before                             1
+  birth                              1
+  brave                              1
+  brought                            1
+  by                                 1
+  cause                              1
+  civil                              1
+  come                               1
+  consecrate                         1
+  consecrated                        1
+  continent                          1
+  created                            1
+  detract                            1
+  did                                1
+  died                               1
+  do                                 1
+  earth                              1
+  endure                             1
+  engaged                            1
+  equal                              1
+  fathers                            1
+  field                              1
+  final                              1
+  fitting                            1
+  forget                             1
+  forth                              1
+  fought                             1
+  four                               1
+  freedom                            1
+  full                               1
+  god                                1
+  government                         1
+  ground                             1
+  hallow                             1
+  highly                             1
+  honored                            1
+  increased                          1
+  larger                             1
+  last                               1
+  liberty                            1
+  little                             1
+  live                               1
+  lives                              1
+  measure                            1
+  met                                1
+  might                              1
+  never                              1
+  nobly                              1
+  nor                                1
+  note                               1
+  now                                1
+  perish                             1
+  place                              1
+  poor                               1
+  portion                            1
+  power                              1
+  proper                             1
+  proposition                        1
+  remaining                          1
+  remember                           1
+  resolve                            1
+  resting                            1
+  say                                1
+  score                              1
+  sense                              1
+  seven                              1
+  should                             1
+  struggled                          1
+  take                               1
+  task                               1
+  testing                            1
+  their                              1
+  those                              1
+  thus                               1
+  under                              1
+  unfinished                         1
+  vain                               1
+  whether                            1
+  will                               1
+  work                               1
+  world                              1
+  years                              1
+
+  ------------------------- MENU -------------------------
+   1. Count the words in the text
+   2. Find the longest word
+   3. Find the most frequent word
+   4. Show every word and its frequency
+   5. Sort the word list (alphabetical / frequency)
+   6. Search for a word
+   7. Show the text summary
+   8. Custom analysis - Lexical Diversity Score
+   9. Show the memory addresses
+  10. Enter or paste a new paragraph
+  11. Exit
+  --------------------------------------------------------
+  Enter choice: 6
+
+  Word to search for: the
+  "the" appears 11 time(s).
+
+  ------------------------- MENU -------------------------
+   1. Count the words in the text
+   2. Find the longest word
+   3. Find the most frequent word
+   4. Show every word and its frequency
+   5. Sort the word list (alphabetical / frequency)
+   6. Search for a word
+   7. Show the text summary
+   8. Custom analysis - Lexical Diversity Score
+   9. Show the memory addresses
+  10. Enter or paste a new paragraph
+  11. Exit
+  --------------------------------------------------------
+  Enter choice: 8
+
+  --- Custom analysis: Lexical Diversity Score ---
+  Distinct words : 138
+  Total words    : 271
+  Score          : 50.9%
+  Reading        : moderate diversity
+  Words used more than once: 47 of 138
+  Note: short texts score higher simply because there is less
+  chance to repeat a word.
+
+  ------------------------- MENU -------------------------
+   1. Count the words in the text
+   2. Find the longest word
+   3. Find the most frequent word
+   4. Show every word and its frequency
+   5. Sort the word list (alphabetical / frequency)
+   6. Search for a word
+   7. Show the text summary
+   8. Custom analysis - Lexical Diversity Score
+   9. Show the memory addresses
+  10. Enter or paste a new paragraph
+  11. Exit
+  --------------------------------------------------------
+  Enter choice: 9
+
+  ---------------- Memory inspection ----------------
+  Text buffer address     : 0x557b81fcfb90
+  Word statistics array   : 0x557b81fd03a0
+  First word-stat entry   : 0x557b81fd03a0
+  Second word-stat entry  : 0x557b81fd03cc
+
+  The first two entries are 44 bytes apart, which is exactly
+  sizeof(wordStat): 40 bytes for the name field plus 4 bytes
+  for the count.
+
+  The text buffer and the word array are both on the heap:
+  malloc/calloc/realloc placed them there, and free() releases
+  them at the end of the program.
+
+  ------------------------- MENU -------------------------
+   1. Count the words in the text
+   2. Find the longest word
+   3. Find the most frequent word
+   4. Show every word and its frequency
+   5. Sort the word list (alphabetical / frequency)
+   6. Search for a word
+   7. Show the text summary
+   8. Custom analysis - Lexical Diversity Score
+   9. Show the memory addresses
+  10. Enter or paste a new paragraph
+  11. Exit
+  --------------------------------------------------------
+  Enter choice: 7
+
+  ================= TEXT SUMMARY =================
+  Source              : Abraham Lincoln, The Gettysburg Address (1863)
+  Total words         : 271
+  Distinct words      : 138
+  Average word length : 5.04 characters
+  Longest word        : battle-field (12 characters)
+  Most frequent word  : that (13 times)
+  Lexical diversity   : 50.9%
+  ===============================================
+
+  ------------------------- MENU -------------------------
+   1. Count the words in the text
+   2. Find the longest word
+   3. Find the most frequent word
+   4. Show every word and its frequency
+   5. Sort the word list (alphabetical / frequency)
+   6. Search for a word
+   7. Show the text summary
+   8. Custom analysis - Lexical Diversity Score
+   9. Show the memory addresses
+  10. Enter or paste a new paragraph
+  11. Exit
+  --------------------------------------------------------
+  Enter choice: 10
+
+  Paste or type the paragraph. Finish with a line containing only a dot (.)
+  > This is a test paragraph with repeated words. The the the words words words are repeated again and again in this small text.
+  > .
+  Text loaded: 125 characters, 23 words, 15 distinct words.
+
+  ------------------------- MENU -------------------------
+   1. Count the words in the text
+   2. Find the longest word
+   3. Find the most frequent word
+   4. Show every word and its frequency
+   5. Sort the word list (alphabetical / frequency)
+   6. Search for a word
+   7. Show the text summary
+   8. Custom analysis - Lexical Diversity Score
+   9. Show the memory addresses
+  10. Enter or paste a new paragraph
+  11. Exit
+  --------------------------------------------------------
+  Enter choice: 1
+
+  Total words: 23
+  Characters in the text: 125
+
+  ------------------------- MENU -------------------------
+   1. Count the words in the text
+   2. Find the longest word
+   3. Find the most frequent word
+   4. Show every word and its frequency
+   5. Sort the word list (alphabetical / frequency)
+   6. Search for a word
+   7. Show the text summary
+   8. Custom analysis - Lexical Diversity Score
+   9. Show the memory addresses
+  10. Enter or paste a new paragraph
+  11. Exit
+  --------------------------------------------------------
+  Enter choice: 8
+
+  --- Custom analysis: Lexical Diversity Score ---
+  Distinct words : 15
+  Total words    : 23
+  Score          : 65.2%
+  Reading        : high diversity - varied vocabulary
+  Words used more than once: 5 of 15
+  Note: short texts score higher simply because there is less
+  chance to repeat a word.
+
+  ------------------------- MENU -------------------------
+   1. Count the words in the text
+   2. Find the longest word
+   3. Find the most frequent word
+   4. Show every word and its frequency
+   5. Sort the word list (alphabetical / frequency)
+   6. Search for a word
+   7. Show the text summary
+   8. Custom analysis - Lexical Diversity Score
+   9. Show the memory addresses
+  10. Enter or paste a new paragraph
+  11. Exit
+  --------------------------------------------------------
+  Enter choice: 11
+
+  Exiting.
+
+  All memory released. Goodbye.

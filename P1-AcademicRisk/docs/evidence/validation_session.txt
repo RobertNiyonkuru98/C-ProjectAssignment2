@@ -1,0 +1,165 @@
+  [mem] capacity 0 -> 10 (initial calloc)
+  [mem] capacity 10 -> 20 (grew)
+
+  ==================================================================
+  Student ID : YOUR-STUDENT-ID
+  Project    : Dynamic Academic Performance and Risk Analysis Engine
+  Custom     : Academic Risk Index (ARI)
+  ==================================================================
+
+  Loaded 12 starting records (capacity 20).
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 1
+
+  --- Add a new student record ---
+  Student ID: 1005
+  Rejected: ID 1005 is already used by Grace Iradukunda.
+  Student ID: 3001
+  Full name: Test One
+  Course: Physics
+  Grade (0-100): 60
+  Added: Test One (ID 3001, Physics, 60). Records now: 13.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 1
+
+  --- Add a new student record ---
+  Student ID: 3002
+  Full name: Test Two
+  Course: Physics
+  Grade (0-100): abc
+  Invalid: enter a whole number between 0 and 100.
+  Grade (0-100): 101
+  Invalid: the grade must be between 0 and 100.
+  Grade (0-100): 50
+  Added: Test Two (ID 3002, Physics, 50). Records now: 14.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 1
+
+  --- Add a new student record ---
+  Student ID: 3003
+  Full name: Bad123
+  Invalid: use letters, spaces, hyphens or apostrophes.
+  Full name: Good Name
+  Course: Physics
+  Grade (0-100): 45
+  Added: Good Name (ID 3003, Physics, 45). Records now: 15.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 7
+  Student ID to remove: 9999
+  No student with ID 9999 - nothing removed.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 6
+
+  Search by:
+    1. Student ID
+    2. Name
+  Choice: 1
+  Student ID: 9999
+  No student with ID 9999.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 9
+
+  ===================== SUMMARY REPORT =====================
+  Total student records : 15
+  Average grade         : 61.00
+  Highest grade         : 91 (Chantal Umutoni, ID 1007)
+  Lowest grade          : 33 (Fabrice Nshuti, ID 1010)
+  Pass threshold        : 50
+  Students passing      : 11
+  Students below pass   : 4
+  Memory in use         : 15 records in 20 slots
+  ----------------------------------------------------------
+  Custom analysis (Academic Risk Index):
+    Cohort ARI mean     : 5.7
+    Moderate/High risk  : 0 student(s) with ARI >= 50
+  ==========================================================
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 10
+
+  Exiting.
+
+  All memory released. Goodbye.

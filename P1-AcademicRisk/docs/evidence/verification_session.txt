@@ -1,0 +1,268 @@
+  [mem] capacity 0 -> 10 (initial calloc)
+  [mem] capacity 10 -> 20 (grew)
+
+  ==================================================================
+  Student ID : YOUR-STUDENT-ID
+  Project    : Dynamic Academic Performance and Risk Analysis Engine
+  Custom     : Academic Risk Index (ARI)
+  ==================================================================
+
+  Loaded 12 starting records (capacity 20).
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 2
+
+  --- Student records (12) ---
+  ID     Name                     Course                     Grade
+  ------ ------------------------ -------------------------- -----
+  1001   Aline Uwase              C Programming               88
+  1002   Kevin Niyonzima          Data Structures             74
+  1003   Diane Mukamana           Database Systems            65
+  1004   Eric Habimana            Digital Electronics         52
+  1005   Grace Iradukunda         C Programming               47
+  1006   Samuel Nkurunziza        Mathematics for Computing   39
+  1007   Chantal Umutoni          Operating Systems           91
+  1008   Patrick Bizimana         Data Structures             70
+  1009   Josiane Ineza            Database Systems            58
+  1010   Fabrice Nshuti           Digital Electronics         33
+  1011   Divine Mutoni            C Programming               82
+  1012   Jean Paul Rwigema        Mathematics for Computing   61
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 3
+
+  Sort by:
+    1. Grade (highest first)
+    2. Name (A-Z)
+    3. Student ID (ascending)
+  Choice: 1
+  Sorted.
+
+  --- Student records (12) ---
+  ID     Name                     Course                     Grade
+  ------ ------------------------ -------------------------- -----
+  1007   Chantal Umutoni          Operating Systems           91
+  1001   Aline Uwase              C Programming               88
+  1011   Divine Mutoni            C Programming               82
+  1002   Kevin Niyonzima          Data Structures             74
+  1008   Patrick Bizimana         Data Structures             70
+  1003   Diane Mukamana           Database Systems            65
+  1012   Jean Paul Rwigema        Mathematics for Computing   61
+  1009   Josiane Ineza            Database Systems            58
+  1004   Eric Habimana            Digital Electronics         52
+  1005   Grace Iradukunda         C Programming               47
+  1006   Samuel Nkurunziza        Mathematics for Computing   39
+  1010   Fabrice Nshuti           Digital Electronics         33
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 3
+
+  Sort by:
+    1. Grade (highest first)
+    2. Name (A-Z)
+    3. Student ID (ascending)
+  Choice: 2
+  Sorted.
+
+  --- Student records (12) ---
+  ID     Name                     Course                     Grade
+  ------ ------------------------ -------------------------- -----
+  1001   Aline Uwase              C Programming               88
+  1007   Chantal Umutoni          Operating Systems           91
+  1003   Diane Mukamana           Database Systems            65
+  1011   Divine Mutoni            C Programming               82
+  1004   Eric Habimana            Digital Electronics         52
+  1010   Fabrice Nshuti           Digital Electronics         33
+  1005   Grace Iradukunda         C Programming               47
+  1012   Jean Paul Rwigema        Mathematics for Computing   61
+  1009   Josiane Ineza            Database Systems            58
+  1002   Kevin Niyonzima          Data Structures             74
+  1008   Patrick Bizimana         Data Structures             70
+  1006   Samuel Nkurunziza        Mathematics for Computing   39
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 3
+
+  Sort by:
+    1. Grade (highest first)
+    2. Name (A-Z)
+    3. Student ID (ascending)
+  Choice: 3
+  Sorted.
+
+  --- Student records (12) ---
+  ID     Name                     Course                     Grade
+  ------ ------------------------ -------------------------- -----
+  1001   Aline Uwase              C Programming               88
+  1002   Kevin Niyonzima          Data Structures             74
+  1003   Diane Mukamana           Database Systems            65
+  1004   Eric Habimana            Digital Electronics         52
+  1005   Grace Iradukunda         C Programming               47
+  1006   Samuel Nkurunziza        Mathematics for Computing   39
+  1007   Chantal Umutoni          Operating Systems           91
+  1008   Patrick Bizimana         Data Structures             70
+  1009   Josiane Ineza            Database Systems            58
+  1010   Fabrice Nshuti           Digital Electronics         33
+  1011   Divine Mutoni            C Programming               82
+  1012   Jean Paul Rwigema        Mathematics for Computing   61
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 4
+
+  Average grade across 12 records: 63.33
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 5
+
+  Top performing student: Chantal Umutoni (ID 1007, Operating Systems) with 91.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 8
+
+  --- Custom analysis: Academic Risk Index (ARI) ---
+  Pass mark: 50    Cohort mean: 63.33
+
+  ID     Name                      Grade  Deficit  Rel.Gap     ARI  Band
+  ------ ------------------------ ------ -------- -------- -------  --------
+  1001   Aline Uwase                  88      0.0      0.0     0.0  Secure
+  1002   Kevin Niyonzima              74      0.0      0.0     0.0  Secure
+  1003   Diane Mukamana               65      0.0      0.0     0.0  Secure
+  1004   Eric Habimana                52      0.0     11.3     4.5  Secure
+  1005   Grace Iradukunda             47      3.0     16.3    10.1  Low
+  1006   Samuel Nkurunziza            39     11.0     24.3    22.9  Low
+  1007   Chantal Umutoni              91      0.0      0.0     0.0  Secure
+  1008   Patrick Bizimana             70      0.0      0.0     0.0  Secure
+  1009   Josiane Ineza                58      0.0      5.3     2.1  Secure
+  1010   Fabrice Nshuti               33     17.0     30.3    32.5  Moderate
+  1011   Divine Mutoni                82      0.0      0.0     0.0  Secure
+  1012   Jean Paul Rwigema            61      0.0      2.3     0.9  Secure
+
+  Cohort ARI: mean 6.1
+  Secure: 9    Low: 2    Moderate: 1    High: 0
+  Highest risk: Fabrice Nshuti (ID 1010, grade 33, ARI 32.5, Moderate)
+
+  Note: the ARI measures the size of each gap. Below pass mark: 3.
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 9
+
+  ===================== SUMMARY REPORT =====================
+  Total student records : 12
+  Average grade         : 63.33
+  Highest grade         : 91 (Chantal Umutoni, ID 1007)
+  Lowest grade          : 33 (Fabrice Nshuti, ID 1010)
+  Pass threshold        : 50
+  Students passing      : 9
+  Students below pass   : 3
+  Memory in use         : 12 records in 20 slots
+  ----------------------------------------------------------
+  Custom analysis (Academic Risk Index):
+    Cohort ARI mean     : 6.1
+    Moderate/High risk  : 0 student(s) with ARI >= 50
+  ==========================================================
+
+  ------------------------- MENU -------------------------
+   1. Add a new student record
+   2. Display all student records
+   3. Sort students (by grade / name / ID)
+   4. Calculate the average grade
+   5. Find the top performing student
+   6. Search for a student (by ID / name)
+   7. Remove a student record
+   8. Custom analysis - Academic Risk Index
+   9. Display the summary report
+  10. Exit
+  --------------------------------------------------------
+  Enter choice: 10
+
+  Exiting.
+
+  All memory released. Goodbye.
